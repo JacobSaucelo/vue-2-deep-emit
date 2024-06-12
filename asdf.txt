@@ -1,0 +1,115 @@
+//  Vuex store:
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+  state: {
+    formData: {
+      name: "",
+      age: "",
+      sex: ""
+    }
+  },
+  mutations: {
+    updateFormData(state, { key, value }) {
+      state.formData[key] = value;
+    }
+  }
+});
+
+
+//ParentComponent
+<template>
+  <div>
+    <ChildComponent />
+  </div>
+</template>
+
+<script>
+import ChildComponent from "./ChildComponent.vue";
+
+export default {
+  components: {
+    ChildComponent,
+  },
+};
+</script>
+
+
+//ChildComponent 
+<template>
+  <div>
+    <GrandChildComponent />
+  </div>
+</template>
+
+<script>
+import GrandChildComponent from "./GrandChildComponent.vue";
+
+export default {
+  components: {
+    GrandChildComponent,
+  },
+  computed: {
+    formData() {
+      return this.$store.state.formData;
+    }
+  }
+};
+</script>
+
+
+//GrandChildComponent 
+<template>
+  <div>
+    <ReusablesCustomInput label="Name" :value="formData.name" @input="updateName" />
+    <ReusablesCustomInput label="Age" :value="formData.age" @input="updateAge" />
+    <ReusablesCustomInput label="Sex" :value="formData.sex" @input="updateSex" />
+  </div>
+</template>
+
+<script>
+import ReusablesCustomInput from "./ReusablesCustomInput.vue";
+
+export default {
+  components: {
+    ReusablesCustomInput,
+  },
+  computed: {
+    formData() {
+      return this.$store.state.formData;
+    }
+  },
+  methods: {
+    updateName(event) {
+      this.$store.commit('updateFormData', { key: 'name', value: event.target.value });
+    },
+    updateAge(event) {
+      this.$store.commit('updateFormData', { key: 'age', value: event.target.value });
+    },
+    updateSex(event) {
+      this.$store.commit('updateFormData', { key: 'sex', value: event.target.value });
+    }
+  }
+};
+</script>
+
+
+// ReusablesCustomInput 
+<template>
+  <div>
+    <label>{{ label }}</label>
+    <input :value="value" @input="$emit('input', $event.target.value)" />
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    label: String,
+    value: String,
+  },
+};
+</script>

@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <NhrCreateMain />
+    <Nauur />
+    <!-- <NhrCreateMain /> -->
   </div>
 </template>
 
 <script>
-import NhrCreateMain from "./Components/nhr/Create/Create.Main.vue";
+// import NhrCreateMain from "./Components/nhr/Create/Create.Main.vue";
+import Nauur from "./Components/tester/main.vue";
 
 export default {
   components: {
-    NhrCreateMain,
+    // NhrCreateMain,
+    Nauur,
   },
 };
 </script>

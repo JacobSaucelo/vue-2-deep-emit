@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ChildComponent v-model:name="name" v-model:age="age" v-model:sex="sex" />
+    <ChildComponent v-model="formData" />
   </div>
 </template>
 
@@ -13,9 +13,11 @@ export default {
   },
   data() {
     return {
-      name: "",
-      age: "",
-      sex: "",
+      formData: {
+        name: "",
+        age: "",
+        sex: "",
+      },
     };
   },
 };
