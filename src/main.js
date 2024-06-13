@@ -1,8 +1,27 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+// import { createStore } from "vuex";
 
-Vue.config.productionTip = false
+import App from "./App.vue";
+import store from "./store.js";
 
+Vue.config.productionTip = false;
+
+// const store = createStore({
+//   state() {
+//     return {
+//       count: 0,
+//     };
+//   },
+
+//   mutations: {
+//     increment(state) {
+//       state.count++;
+//     },
+//   },
+// });
+
+// Vue.use(store);
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
